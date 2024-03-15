@@ -1,5 +1,6 @@
 const User = require("../model/userModel");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { generateTokenAndSetCookie } = require('../utils/generateTokens');
 
 
@@ -22,7 +23,7 @@ module.exports.login = async (req, res) => {
         });
     }
     catch(err){
-        console.log('Error in sign up controller: ', err);
+        console.log('Error in login controller: ', err);
         res.status(500).json({error: 'Internal Server Error'});
     }
 }
@@ -73,5 +74,12 @@ module.exports.signup = async (req, res) => {
 }
 
 module.exports.logout = async (req, res) => {
-
+    try{
+        res.cookie("jwt", "", {maxAge: 0});
+        res.status(200).json({message: "Logged out successfully"});
+    }
+    catch(err){
+        console.log('Error in logout controller: ', err);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
 }
