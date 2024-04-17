@@ -3,9 +3,11 @@ import MessageInput from './MessageInput'
 import Messages from './Messages'
 import { TiMessages } from 'react-icons/ti'
 import useConversation from '../../zustand/useConversation';
+import { useAuthContext } from '../../context/AuthContext';
 
 const MessageContainer = () => {
     const { selectedConversation, setSelectedConversation } = useConversation();
+    const {authUser} = useAuthContext();
 
     useEffect(() => {
 
