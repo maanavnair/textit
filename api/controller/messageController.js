@@ -1,5 +1,6 @@
 const Message = require('../model/messageModel');
 const Conversation = require('../model/conversationModel');
+const { getReceiverSocketId, io } = require('../socket/socket')
 const mongoose = require('mongoose');
 
 module.exports.sendMessage = async(req, res) => {
@@ -33,6 +34,11 @@ module.exports.sendMessage = async(req, res) => {
 
         //this will run in parallel
         await Promise.all([conversation.save(), newMessage.save()]);
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage); //sending events to specific clients
+        }
 
         res.status(201).json(newMessage);
 

@@ -8,7 +8,9 @@ const authRoutes = require('./routes/authRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-const app = express();
+const { app, io, server } = require('./socket/socket');
+
+
 dotenv.config();
 
 app.use(cors({credentials: true, origin: "http://localhost:5173"}));
@@ -26,7 +28,7 @@ app.use('/api/users', userRoutes);
  
 mongoose.connect(process.env.MONGO_URI)
 .then( () => {
-   app.listen(process.env.PORT, () => {
+   server.listen(process.env.PORT, () => {
       console.log("Server Started at port: ", process.env.PORT);
    })
 })
