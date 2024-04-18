@@ -19,9 +19,6 @@ const Login = () => {
       bg-opacity-0'>
         <h1 className='text-3xl font-semibold text-center text-grey-300'>
           Login
-          <span className='text-blue-500'>
-            Textit
-          </span>
         </h1>
 
         <form onSubmit={handleSubmit}>
