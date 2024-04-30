@@ -9,7 +9,7 @@ const useSendMessages = () => {
     const sendMessage = async (message) => {
         setLoading(true);
         try{
-            const res = await fetch(`http://localhost:3000/api/messages/send/${selectedConversation._id}`, {
+            const res = await fetch(`https://textit-backend.vercel.app/api/messages/send/${selectedConversation._id}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 credentials: 'include',

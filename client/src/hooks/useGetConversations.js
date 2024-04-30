@@ -9,7 +9,7 @@ const useGetConversations = () => {
         const getConversations = async () => {
             setLoading(true);
             try{
-                const res = await fetch('http://localhost:3000/api/users', {
+                const res = await fetch('https://textit-backend.vercel.app/api/users', {
                     credentials: 'include'
                 });
                 const data = await res.json();
